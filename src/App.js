@@ -1,21 +1,28 @@
 import React, { useState } from "react";
 // import {useCounter}
 
-function useClickCounter() {
-  const [clicks, setClicks] = useState(0);
+function useClickCounter(num) {
+  const [clicks, setClicks] = useState(num);
   const incrementClicks = () => {
     setClicks(clicks + 1);
   };
-  return [clicks, incrementClicks];
+
+  const decrementClicks = () => {
+    setClicks(clicks - 1);
+  };
+  return [clicks, incrementClicks, decrementClicks];
 }
 
 function App() {
-  const [clicks, incrementClicks] = useClickCounter(0);
+  const [clicks, incrementClicks, decrementClicks] = useClickCounter(0);
 
   return (
     <div className="app">
       <button onClick={incrementClicks}>
         How many times have you pressed me? {clicks} times
+      </button>
+      <button onClick={decrementClicks}>
+        Press me to reduce the total {clicks} times
       </button>
     </div>
   );
